@@ -5235,14 +5235,14 @@ fieldset[disabled] .header-cart.variant-1 .dropdown-container .block-content .ac
 .header-cart.variant-1 .dropdown-container .product-item-qty,
 .header-cart.variant-1 .dropdown-container .product-item-pricing {
   float: left;
-  padding: 0 10px;
+  padding-left: 10px;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.2em;
 }
 .header-cart.variant-1 .dropdown-container .product-item-name {
-  width: 50%;
+  width: 35%;
   margin-top: 7px;
   overflow: hidden;
 }
@@ -5258,7 +5258,7 @@ fieldset[disabled] .header-cart.variant-1 .dropdown-container .block-content .ac
 }
 .header-cart.variant-1 .dropdown-container .product-item-qty input {
   width: 100%;
-  padding: 5px;
+  padding: 5px 10px;
   text-align: center;
   background: transparent;
   border: 0;
@@ -5270,7 +5270,7 @@ fieldset[disabled] .header-cart.variant-1 .dropdown-container .block-content .ac
 }
 .header-cart.variant-1 .dropdown-container .product-item-pricing {
   font-family: 'Roboto', sans-serif;
-  width: 30%;
+  width: 40%;
 }
 .header-cart.variant-1 .dropdown-container .product-item-pricing .price-container {
   float: right;
@@ -6693,6 +6693,7 @@ body.touch .header-cart.variant-2 .dropdown-container .btn-minicart-close:hover 
   font-size: 22px;
   line-height: 28px;
   text-align: center;
+  margin-block: 15px;
 }
 .products-grid.product-variant-3 .product-item.large .product-item-actions .actions-primary .btn span {
   display: none;
@@ -10146,6 +10147,8 @@ body.touch .dblclick-text span {
   padding: 0 5px;
   color: #ffffff;
   background-color: #f82e56;
+  width: 25%;
+  text-align: center;
 }
 .productStack .products-list .actions {
   position: absolute;

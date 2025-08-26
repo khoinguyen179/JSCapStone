@@ -301,6 +301,10 @@ li.hovered:hover body:not(.touch) .sub-menu {
 .width-40 {
   width: 40%;
 }
+
+.width-60 {
+  width: 60%;
+}
 /* multicolumns not for IE10 less */
 @media screen and (min-width: 1200px) {
   .column-count-2 {
