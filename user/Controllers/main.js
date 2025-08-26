@@ -1,7 +1,5 @@
-import Product from "./../models/Product.js";
 import Cart from "./../Models/Cart.js";
 import ProductList from "./../Models/ProductList.js";
-import ProductOnCart from "./../Models/ProductOnCart.js";
 
 const productList =new ProductList();
 const cart =new Cart();
