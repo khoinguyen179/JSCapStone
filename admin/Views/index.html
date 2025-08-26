@@ -34,8 +34,7 @@
     <br />
     <!-- Toggle modal button -->
     <button
-      data-modal-target="productModal"
-      data-modal-toggle="productModal"
+      id="open-add"
       class="text-white bg-orange-700 hover:bg-blue-700 font-medium rounded-lg px-4 py-2"
     >
       Thêm sản phẩm
@@ -43,7 +42,7 @@
 
     <!-- Modal -->
     <div
-      id="productModal"
+      id="product-modal"
       tabindex="-1"
       aria-hidden="true"
       class="hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black/50"
@@ -120,7 +119,7 @@
           <div class="flex justify-end gap-2 pt-3 border-t">
             <button
               type="button"
-              data-modal-hide="productModal"
+              id="close-modal"
               class="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300"
             >
               Hủy
@@ -162,9 +161,6 @@
 
     <!-- Flowbite-->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-
-    <!-- Models -->
-    <script src="./../Models/Products.js"></script>
 
     <!-- Controllers -->
     <script type="module" src="./../Controllers/main.js"></script>

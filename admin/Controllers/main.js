@@ -3,7 +3,7 @@ import { Product, ProductService } from "./../Models/Products.js";
 
 const service = new ProductService(
   "https://68a757aa639c6a54e9a1c48a.mockapi.io/Products"
-); // đổi thành API thật
+);
 const form = document.getElementById("product-form");
 const productList = document.getElementById("product-list");
 const searchInput = document.getElementById("search");
@@ -12,29 +12,71 @@ const sortSelect = document.getElementById("sort");
 let products = [];
 let editingId = null;
 
+//Modal
+//Mở model add sản phẩm
+function openModal(title = "Thêm sản phẩm") {
+  document.getElementById("modal-title").innerText = title;
+  document.getElementById("product-modal").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("product-modal").classList.add("hidden");
+}
+
+// Đóng modal
+document.getElementById("close-modal").addEventListener("click", closeModal);
+
 // Render danh sách
 function renderProducts(data) {
   productList.innerHTML = data
     .map(
       (p) => `
-    <tr>
-      <td>${p.id}</td>
-      <td>${p.name}</td>
-      <td>${p.price}</td>
-      <td>${p.screen}</td>
-      <td>${p.backCamera}</td>
-      <td>${p.frontCamera}</td>
-      <td><img src="${p.img}" width="50"></td>
-      <td>${p.desc}</td>
-      <td>${p.type}</td>
-      <td>
-        <button onclick="editProduct('${p.id}')">Sửa</button>
-        <button onclick="deleteProduct('${p.id}')">Xóa</button>
+    <tr class="border-b hover:bg-gray-50">
+      <td class="px-3 py-2">${p.id}</td>
+      <td class="px-3 py-2">${p.name}</td>
+      <td class="px-3 py-2">${p.price}</td>
+      <td class="px-3 py-2">${p.screen}</td>
+      <td class="px-3 py-2">${p.backCamera}</td>
+      <td class="px-3 py-2">${p.frontCamera}</td>
+      <td class="px-3 py-2"><img src="${p.img}" class="w-12 h-12 object-cover rounded" /></td>
+      <td class="px-3 py-2">${p.desc}</td>
+      <td class="px-3 py-2">${p.type}</td>
+      <td class="px-3 py-2 space-x-2">
+        <button 
+          class="edit-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+          data-id="${p.id}">
+          Sửa
+        </button>
+        <button 
+          class="delete-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+          data-id="${p.id}">
+          Xóa
+        </button>
       </td>
     </tr>
   `
     )
     .join("");
+  // Gắn lại sự kiện sau khi render
+  document.querySelectorAll(".edit-btn").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      editProduct(id);
+    })
+  );
+
+  document.querySelectorAll(".delete-btn").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      deleteProduct(id);
+    })
+  );
+
+  document
+    .querySelectorAll(".edit-btn")
+    .forEach((btn) =>
+      btn.addEventListener("click", () => editProduct(btn.dataset.id))
+    );
 }
 
 // Load dữ liệu ban đầu
@@ -46,6 +88,7 @@ async function loadProducts() {
 // Thêm/Update sản phẩm
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  console.log("Form đã được submit!");
 
   // Validation
   const name = document.getElementById("name").value.trim();
@@ -80,16 +123,20 @@ form.addEventListener("submit", async (e) => {
 });
 
 // Xóa sản phẩm
-window.deleteProduct = async function (id) {
+async function deleteProduct(id) {
   await service.deleteProduct(id);
-  loadProducts();
-};
+  //Cập nhật product
+  products = products.filter((p) => p.id !== id);
+  renderProducts(products);
+}
 
 // Sửa sản phẩm (fill form)
-window.editProduct = function (id) {
+function editProduct(id) {
   const p = products.find((p) => p.id == id);
   if (!p) return;
   editingId = id;
+
+  // Fill form
   document.getElementById("name").value = p.name;
   document.getElementById("price").value = p.price;
   document.getElementById("screen").value = p.screen;
@@ -98,7 +145,9 @@ window.editProduct = function (id) {
   document.getElementById("img").value = p.img;
   document.getElementById("desc").value = p.desc;
   document.getElementById("type").value = p.type;
-};
+
+  openModal("Cập nhật sản phẩm");
+}
 
 // Tìm kiếm theo tên
 searchInput.addEventListener("input", () => {

@@ -30,21 +30,21 @@ export class ProductService {
   }
 
   async getProducts() {
-    const res = await axios.get(`${this.apiUrl}/products`);
+    const res = await axios.get(this.apiUrl);
     return res.data;
   }
 
   async addProduct(product) {
-    const res = await axios.post(`${this.apiUrl}/products`, product);
+    const res = await axios.post(this.apiUrl, product);
     return res.data;
   }
 
   async updateProduct(id, product) {
-    const res = await axios.put(`${this.apiUrl}/products/${id}`, product);
+    const res = await axios.put(`${this.apiUrl}/${id}`, product);
     return res.data;
   }
 
   async deleteProduct(id) {
-    await axios.delete(`${this.apiUrl}/products/${id}`);
+    await axios.delete(`${this.apiUrl}/${id}`);
   }
 }
