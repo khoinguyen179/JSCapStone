@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang quản trị</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Flowbite -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="./../../assets/css/admin/admin.css" />
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.11.0/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1 class="text-lg font-bold">Quản lý sản phẩm</h1>
+
+    <!-- Tìm kiếm + Sắp xếp -->
+    <div>
+      <input type="text" id="search" placeholder="Tìm sản phẩm..." />
+      <select id="sort">
+        <option value="">-- Sắp xếp theo giá --</option>
+        <option value="asc">Giá tăng dần</option>
+        <option value="desc">Giá giảm dần</option>
+      </select>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <!-- Toggle modal button -->
+    <button
+      id="open-add"
+      data-modal-target="product-modal"
+      data-modal-toggle="product-modal"
+      class="text-white bg-orange-700 hover:bg-blue-700 font-medium rounded-lg px-4 py-2"
+    >
+      Thêm sản phẩm
+    </button>
+
+    <!-- Modal -->
+    <div
+      id="product-modal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black/50"
+    >
+      <div class="relative w-full max-w-2xl bg-white rounded-lg shadow p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center border-b pb-3">
+          <h3 class="text-xl font-semibold text-gray-900">
+            Thêm / Sửa sản phẩm
+          </h3>
+          <button
+            type="button"
+            class="text-gray-400 hover:text-gray-900"
+            data-modal-hide="product-modal"
+          >
+            ✖
+          </button>
+        </div>
+        <!-- Body (Form) -->
+        <form id="product-form" class="space-y-4 mt-4">
+          <input type="hidden" id="productId" />
+          <input
+            type="text"
+            id="name"
+            placeholder="Tên sản phẩm"
+            class="w-full border rounded-lg p-2"
+            required
+          />
+          <input
+            type="number"
+            id="price"
+            placeholder="Giá"
+            class="w-full border rounded-lg p-2"
+            required
+          />
+          <input
+            type="text"
+            id="screen"
+            placeholder="Màn hình"
+            class="w-full border rounded-lg p-2"
+          />
+          <input
+            type="text"
+            id="backCamera"
+            placeholder="Camera sau"
+            class="w-full border rounded-lg p-2"
+          />
+          <input
+            type="text"
+            id="frontCamera"
+            placeholder="Camera trước"
+            class="w-full border rounded-lg p-2"
+          />
+          <input
+            type="text"
+            id="img"
+            placeholder="Link hình ảnh"
+            class="w-full border rounded-lg p-2"
+            required
+          />
+          <textarea
+            id="desc"
+            placeholder="Mô tả"
+            class="w-full border rounded-lg p-2"
+          ></textarea>
+          <input
+            type="text"
+            id="type"
+            placeholder="Loại (iphone/samsung)"
+            class="w-full border rounded-lg p-2"
+          />
+
+          <!-- Footer -->
+          <div class="flex justify-end gap-2 pt-3 border-t">
+            <button
+              type="button"
+              id="close-modal"
+              class="bg-gray-200 px-4 py-2 rounded-lg hover:bg-gray-300"
+            >
+              Hủy
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            >
+              Lưu sản phẩm
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Danh sách -->
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Màn hình</th>
+            <th>Camera sau</th>
+            <th>Camera trước</th>
+            <th>Hình</th>
+            <th>Mô tả</th>
+            <th>Loại</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="product-list"></tbody>
+      </table>
+    </div>
+
+    <!-- Axios CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js"></script>
+
+    <!-- Flowbite-->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <!-- Controllers -->
+    <script type="module" src="./../Controllers/main.js"></script>
+  </body>
+</html>
